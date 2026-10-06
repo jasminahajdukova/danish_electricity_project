@@ -1,1 +1,12 @@
 https://www.w3schools.com/python/python_virtualenv.asp
+https://www.w3schools.com/tools/tool_env_generator.php
+https://hub.docker.com/_/postgres
+https://docs.docker.com/guides/postgresql/
+
+
+######### DOCKER #########
+
+docker compose up -d    -> (-d) runs it in the background
+docker compose ps       -> should show the container as running
+docker compose config   -> shows config (ALSO SHOWS PASSWORD)
+docker compose down     -> stop and remove the containerdocker compose down
