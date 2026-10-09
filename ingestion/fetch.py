@@ -1,9 +1,19 @@
 import requests
 
 
-url = 'https://api.energidataservice.dk/dataset/DayAheadPrices'
+def get_records_from_dataset(dataset_name, start, end):
+    url = f'https://api.energidataservice.dk/dataset/{dataset_name}'
 
-response = requests.get(url, params= {"start": "2026-05-05", "end": "2026-05-10", "limit":"5"})
+    
+    response = requests.get(url, params= {"start": start, "end": end})
+    response.raise_for_status()
+    json_response = response.json()
+    total = json_response.get("total", "")
+    print(f"Total records found: {total} for daataset name {dataset_name}")
 
 
-print(response.text)
+
+    
+get_records_from_dataset("DayAheadPrices", "2026-10-09", "2026-10-10")
+
+
