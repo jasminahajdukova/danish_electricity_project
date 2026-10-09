@@ -1,4 +1,5 @@
 import requests
+import pandas as pd
 
 
 def get_records_from_dataset(dataset_name, start, end):
@@ -8,12 +9,16 @@ def get_records_from_dataset(dataset_name, start, end):
     response = requests.get(url, params= {"start": start, "end": end})
     response.raise_for_status()
     json_response = response.json()
-    total = json_response.get("total", "")
-    print(f"Total records found: {total} for daataset name {dataset_name}")
+    df = pd.DataFrame(json_response["records"])
+    return df
 
 
-
-    
-get_records_from_dataset("DayAheadPrices", "2026-10-09", "2026-10-10")
-
-
+if __name__ == "__main__":    
+    result = get_records_from_dataset("DayAheadPrices", "2026-10-09", "2026-10-10")
+    print("==========================================================================================")
+    print(result.shape)
+    print("==========================================================================================")
+    print(result.head())
+    print("==========================================================================================")
+    print(result.dtypes)
+    print("==========================================================================================")
