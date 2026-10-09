@@ -3,10 +3,15 @@ https://www.w3schools.com/tools/tool_env_generator.php
 https://hub.docker.com/_/postgres
 https://docs.docker.com/guides/postgresql/
 
+######### VENV #########
+python -m venv myfirstproject       -> create a virtual environment named myfirstproject
+source myfirstproject/bin/activate  -> activate the virtual environment
 
 ######### DOCKER #########
 
-docker compose up -d    -> (-d) runs it in the background
-docker compose ps       -> should show the container as running
-docker compose config   -> shows config (ALSO SHOWS PASSWORD)
-docker compose down     -> stop and remove the containerdocker compose down
+docker compose up -d                -> (-d) runs it in the background
+docker compose ps                   -> should show the container as running
+docker compose config               -> shows config (ALSO SHOWS PASSWORD)
+docker compose down                 -> stop and remove the containerdocker compose down
+
+https://www.w3schools.com/python/ref_requests_get.asp
