@@ -28,8 +28,30 @@ def get_engine():
     engine = create_engine(url=url)
     return engine
 
+
 def dataframe_to_table(df, dataset_name, engine):
-    return df.to_sql(name=dataset_name, con=engine, schema='raw', index=False)
+
+    if df.empty:
+        return 0
+
+    price_areas = df['PriceArea'].unique().tolist()
+    min_time    = df['TimeUTC'].min()
+    max_time    = df['TimeUTC'].max()
+
+    with engine.begin() as conn:
+        delete_query = text(f"""
+            delete from raw.{dataset_name}
+            where "TimeUTC" between :start and :end
+                and "PriceArea" = ANY(:price_areas)
+        """)
+        conn.execute(delete_query, {"start": min_time, "end": max_time, "price_areas": price_areas})
+
+        return df.to_sql(
+            name=dataset_name, 
+            con=conn, 
+            schema='raw', 
+            index=False, 
+            if_exists='append')
 
 
 def create_raw(engine):

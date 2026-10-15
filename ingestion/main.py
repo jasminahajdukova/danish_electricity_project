@@ -2,7 +2,7 @@ import fetch, load
 
 dataset     = 'dayaheadprices'
 start       = '2026-10-10'
-end         = '2026-10-11'
+end         = '2026-10-12'
 table_name  = 'day_ahead_prices'
 
 dataframe = fetch.get_records_from_dataset(dataset_name=dataset, start=start, end=end)
