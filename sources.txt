@@ -18,3 +18,19 @@ https://www.w3schools.com/python/ref_requests_get.asp
 https://www.geeksforgeeks.org/python/response-raise_for_status-python-requests/
 https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html
 https://www.geeksforgeeks.org/pandas/python-pandas-to_datetime/
+
+
+https://pypi.org/project/SQLAlchemy/
+https://pypi.org/project/psycopg-binary/
+https://stackoverflow.com/questions/40216311/reading-in-environment-variables-from-an-environment-file
+https://www.w3schools.com/python/ref_string_join.asp
+https://www.geeksforgeeks.org/python/connecting-to-sql-database-using-sqlalchemy-in-python/
+https://stackoverflow.com/questions/72714112/what-is-the-difference-between-engine-begin-and-engine-connect
+https://docs.sqlalchemy.org/en/21/core/connections.html
+https://stackoverflow.com/questions/17972020/how-to-execute-raw-sql-in-flask-sqlalchemy-app
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_sql.html
+
+
+######### CONNECT TO POSTGRES DB #########
+docker compose exec <service> psql -U admin -d danish_electricity
+docker compose exec db psql -U admin -d danish_electricity
