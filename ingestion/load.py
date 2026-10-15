@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
+import pandas
 
 load_dotenv()
 
@@ -27,15 +28,17 @@ def get_engine():
     engine = create_engine(url)
     return engine
 
-# if __name__ == "__main__":
-#     try:
-#         engine = get_engine()
-#         with engine.connect() as conn:
-#             print(f"Connection to the {POSTGRES_HOST} for user {POSTGRES_USER} created successfully")
-#             result = conn.execute(text('SELECT 1'))
-#             # .scalar give the first column of the first row
-#             # .all for every row, .fetchone for every row
-#             print(result.fetchone())
-    
-#     except Exception as err:
-#         print(f"Connection to the {POSTGRES_HOST} for user {POSTGRES_USER} could not be made due to the following error:\n{err}")
+def dataframe_to_table(df, dataset_name, engine):
+    return df.to_sql(name=dataset_name, con=engine)
+
+
+def create_raw(engine):
+    with engine.begin() as conn:
+        conn.execute(text('CREATE SCHEMA IF NOT EXISTS raw;'))
+
+if __name__ == "__main__":
+    try:
+        engine = get_engine()
+        create_raw(engine=engine)
+    except Exception as err:
+        print(f"Connection to the {POSTGRES_HOST} for user {POSTGRES_USER} could not be made due to the following error:\n{err}")
