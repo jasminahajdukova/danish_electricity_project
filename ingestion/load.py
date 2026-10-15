@@ -25,20 +25,21 @@ def check_missing_env_variables():
 def get_engine():
     check_missing_env_variables()
     url = f'postgresql+psycopg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
-    engine = create_engine(url)
+    engine = create_engine(url=url)
     return engine
 
 def dataframe_to_table(df, dataset_name, engine):
-    return df.to_sql(name=dataset_name, con=engine)
+    return df.to_sql(name=dataset_name, con=engine, schema='raw', index=False)
 
 
 def create_raw(engine):
     with engine.begin() as conn:
         conn.execute(text('CREATE SCHEMA IF NOT EXISTS raw;'))
 
-if __name__ == "__main__":
-    try:
-        engine = get_engine()
-        create_raw(engine=engine)
-    except Exception as err:
-        print(f"Connection to the {POSTGRES_HOST} for user {POSTGRES_USER} could not be made due to the following error:\n{err}")
+# if __name__ == "__main__":
+#     try:
+#         engine = get_engine()
+#         create_raw(engine=engine)
+#         result = dataframe_to_table(df, dataset_name, engine)
+#     except Exception as err:
+#         print(f"Connection to the {POSTGRES_HOST} for user {POSTGRES_USER} could not be made due to the following error:\n{err}")
