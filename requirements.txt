@@ -2,3 +2,4 @@ python-dotenv
 slqachemy
 psycopg[binary]
 pytest
+urllib3
