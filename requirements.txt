@@ -1,3 +1,4 @@
 python-dotenv
 slqachemy
 psycopg[binary]
+pytest
