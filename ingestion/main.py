@@ -1,13 +1,19 @@
 import fetch, load
 
-dataset     = 'dayaheadprices'
 start       = '2026-10-10'
 end         = '2026-10-12'
-table_name  = 'day_ahead_prices'
 
-dataframe = fetch.get_records_from_dataset(dataset_name=dataset, start=start, end=end)
-print(dataframe.head())
+
+dataframe_dayaheadprices = fetch.get_records_from_dataset(dataset_name="DayAheadPrices",start=start, end=end)
+dataframe_co2emis         = fetch.get_records_from_dataset(dataset_name="CO2Emis",start=start, end=end)
+
+print("==================================================================================================================")
+print(dataframe_dayaheadprices.head())
+print("==================================================================================================================")
+print(dataframe_co2emis.head())
+print("==================================================================================================================")
 
 engine = load.get_engine()
 load.create_raw(engine=engine)
-result = load.dataframe_to_table(df=dataframe, dataset_name=table_name, engine=engine)
+result_dayaheadprices = load.dayaheadprices_to_table(df=dataframe_dayaheadprices, engine=engine)
+result_co2emis        = load.co2emis_to_table(df=dataframe_co2emis, engine=engine)

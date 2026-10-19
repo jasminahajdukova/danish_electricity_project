@@ -30,7 +30,7 @@ def create_raw(engine):
     with engine.begin() as conn:
         conn.execute(text('CREATE SCHEMA IF NOT EXISTS raw;'))
 
-def dataframe_to_table(df, dataset_name, engine):
+def dayaheadprices_to_table(df, engine, dataset_name="dayaheadprices"):
 
     if df.empty:
         return 0
@@ -45,6 +45,33 @@ def dataframe_to_table(df, dataset_name, engine):
             delete_query = text(f"""
                 delete from raw.{dataset_name}
                 where "TimeUTC" between :start and :end
+                    and "PriceArea" = ANY(:price_areas)
+            """)
+            conn.execute(delete_query, {"start": min_time, "end": max_time, "price_areas": price_areas})
+
+        return df.to_sql(
+            name=dataset_name, 
+            con=conn, 
+            schema='raw', 
+            index=False, 
+            if_exists='append')
+
+
+def co2emis_to_table(df, engine, dataset_name="co2emis"):
+
+    if df.empty:
+        return 0
+
+    price_areas = df['PriceArea'].unique().tolist()
+    min_time    = df['Minutes5UTC'].min()
+    max_time    = df['Minutes5UTC'].max()
+
+    with engine.begin() as conn:
+        inspector = inspect(conn)
+        if inspector.has_table(dataset_name, schema="raw"):
+            delete_query = text(f"""
+                delete from raw.{dataset_name}
+                where "Minutes5UTC" between :start and :end
                     and "PriceArea" = ANY(:price_areas)
             """)
             conn.execute(delete_query, {"start": min_time, "end": max_time, "price_areas": price_areas})
