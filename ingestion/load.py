@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, text
-import pandas
+from sqlalchemy import create_engine, text, inspect
+
 
 load_dotenv()
 
@@ -19,15 +19,16 @@ def check_missing_env_variables():
 
     if missing:
         raise RuntimeError(f"{', '.join(missing)} missing in .env")
-
-
-
 def get_engine():
     check_missing_env_variables()
     url = f'postgresql+psycopg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
     engine = create_engine(url=url)
     return engine
 
+
+def create_raw(engine):
+    with engine.begin() as conn:
+        conn.execute(text('CREATE SCHEMA IF NOT EXISTS raw;'))
 
 def dataframe_to_table(df, dataset_name, engine):
 
@@ -39,12 +40,14 @@ def dataframe_to_table(df, dataset_name, engine):
     max_time    = df['TimeUTC'].max()
 
     with engine.begin() as conn:
-        delete_query = text(f"""
-            delete from raw.{dataset_name}
-            where "TimeUTC" between :start and :end
-                and "PriceArea" = ANY(:price_areas)
-        """)
-        conn.execute(delete_query, {"start": min_time, "end": max_time, "price_areas": price_areas})
+        inspector = inspect(conn)
+        if inspector.has_table(dataset_name, schema="raw"):
+            delete_query = text(f"""
+                delete from raw.{dataset_name}
+                where "TimeUTC" between :start and :end
+                    and "PriceArea" = ANY(:price_areas)
+            """)
+            conn.execute(delete_query, {"start": min_time, "end": max_time, "price_areas": price_areas})
 
         return df.to_sql(
             name=dataset_name, 
@@ -53,15 +56,3 @@ def dataframe_to_table(df, dataset_name, engine):
             index=False, 
             if_exists='append')
 
-
-def create_raw(engine):
-    with engine.begin() as conn:
-        conn.execute(text('CREATE SCHEMA IF NOT EXISTS raw;'))
-
-# if __name__ == "__main__":
-#     try:
-#         engine = get_engine()
-#         create_raw(engine=engine)
-#         result = dataframe_to_table(df, dataset_name, engine)
-#     except Exception as err:
-#         print(f"Connection to the {POSTGRES_HOST} for user {POSTGRES_USER} could not be made due to the following error:\n{err}")
