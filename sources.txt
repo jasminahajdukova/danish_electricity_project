@@ -44,3 +44,6 @@ https://pytest-with-eric.com/pytest-best-practices/pytest-ini/
 
 https://stackoverflow.com/questions/5626193/what-is-monkey-patching
 https://www.geeksforgeeks.org/python/monkey-patching-in-python-dynamic-behavior/
+
+
+https://www.w3resource.com/python-exercises/urllib3/python-urllib3-exercise-6.php
