@@ -34,3 +34,13 @@ https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_sql.html
 ######### CONNECT TO POSTGRES DB #########
 docker compose exec <service> psql -U admin -d danish_electricity
 docker compose exec db psql -U admin -d danish_electricity
+
+https://docs.sqlalchemy.org/en/21/core/inspection.html
+https://docs.sqlalchemy.org/en/21/core/inspection.html#sqlalchemy.inspect
+
+
+https://www.geeksforgeeks.org/python/python-import-module-from-different-directory/
+https://pytest-with-eric.com/pytest-best-practices/pytest-ini/
+
+https://stackoverflow.com/questions/5626193/what-is-monkey-patching
+https://www.geeksforgeeks.org/python/monkey-patching-in-python-dynamic-behavior/
