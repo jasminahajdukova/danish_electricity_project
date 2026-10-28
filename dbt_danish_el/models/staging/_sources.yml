@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: danish_electricity
+    database: danish_electricity
+    schema: raw
+    tables:
+      - name: co2emis
+      - name: dayaheadprices
