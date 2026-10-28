@@ -9,11 +9,11 @@ POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 POSTGRES_USER     = os.getenv('POSTGRES_USER')
 POSTGRES_DB       = os.getenv('POSTGRES_DB')
 POSTGRES_HOST     = "localhost"
-POSTGRES_PORT     = '5432'
+POSTGRES_PORT     = os.getenv('POSTGRES_PORT')
 
 def check_missing_env_variables():
     missing = []
-    for env_variable in ['POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD']:
+    for env_variable in ['POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD', 'POSTGRES_PORT']:
         
         if not os.environ.get(env_variable, "").strip():
             missing.append(env_variable)
