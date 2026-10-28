@@ -31,7 +31,7 @@ def main():
     end     = args.end
 
     if start >= end:
-        parser.error(f"--start ({start}) cannot be later than --end ({end})")
+        parser.error(f"--start ({start}) cannot be later or on the same date than --end ({end})")
 
     dataframe_dayaheadprices = fetch.get_records_from_dataset(
         dataset_name="DayAheadPrices",
@@ -46,13 +46,20 @@ def main():
     engine = load.get_engine()
     load.create_raw(engine=engine)
 
-    result_dayaheadprices = load.dayaheadprices_to_table(
-        df=dataframe_dayaheadprices, 
-        engine=engine)
-    
-    result_co2emis = load.co2emis_to_table(
-        df=dataframe_co2emis, 
-        engine=engine)
+
+    result_dayaheadprices = load.load_to_table(df=dataframe_dayaheadprices, 
+                                               engine=engine, 
+                                               dataset_name="dayaheadprices", 
+                                               time='TimeUTC')
+
+
+    result_co2emis = load.load_to_table(df=dataframe_co2emis,
+                                        engine=engine,
+                                        dataset_name='co2emis',
+                                        time='Minutes5UTC')
+   
+    return result_dayaheadprices, result_co2emis
+
 
 if __name__ == "__main__":
     main()
