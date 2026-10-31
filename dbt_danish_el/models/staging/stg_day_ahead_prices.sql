@@ -1,0 +1,1 @@
+select * from {{ source('danish_electricity', 'dayaheadprices') }}
