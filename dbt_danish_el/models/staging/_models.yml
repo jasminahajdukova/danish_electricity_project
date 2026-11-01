@@ -16,3 +16,19 @@ models:
       - name: day_ahead_price_dkk
         data_tests:
           - not_null
+
+  - name: stg_co2_emis
+    columns:
+      - name: minutes_5_utc
+        data_tests:
+          - not_null
+      - name: price_area
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['DK1', 'DK2']
+      - name: co2_emission
+        data_tests:
+          - not_null
+
