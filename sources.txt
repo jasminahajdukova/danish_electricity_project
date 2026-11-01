@@ -47,3 +47,12 @@ https://www.geeksforgeeks.org/python/monkey-patching-in-python-dynamic-behavior/
 
 
 https://www.w3resource.com/python-exercises/urllib3/python-urllib3-exercise-6.php
+
+
+### MILESTONE 3 ###
+https://stackoverflow.com/questions/17958288/branch-and-checkout-using-a-single-command
+https://medium.com/@prule70/getting-started-with-dbt-65e49eccd4c3
+https://docs.getdbt.com/docs/build/sources?version=2
+
+### AT TIME ZONE ###
+https://neon.com/postgresql/date-functions/at-time-zone

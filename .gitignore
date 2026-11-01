@@ -3,3 +3,4 @@ project-context.md
 .env
 notes/
 __pycache__/
+logs/
