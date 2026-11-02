@@ -56,3 +56,7 @@ https://docs.getdbt.com/docs/build/sources?version=2
 
 ### AT TIME ZONE ###
 https://neon.com/postgresql/date-functions/at-time-zone
+
+
+### DATE_PART ###
+https://neon.com/postgresql/date-functions/date_part
