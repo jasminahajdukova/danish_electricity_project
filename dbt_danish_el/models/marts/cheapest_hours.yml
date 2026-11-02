@@ -1,0 +1,18 @@
+models:
+  - name: cheapest_hours
+    columns:
+      - name: price_area
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['SE3', 'NO2', 'DK1', 'SE4', 'DE', 'DK2']
+      - name: hour
+        data_tests:
+          - not_null
+      - name: avg_price
+        data_tests:
+          - not_null
+      - name: avg_price_by_hour_rank
+        data_tests:
+          - not_null
