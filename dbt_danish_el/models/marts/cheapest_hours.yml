@@ -7,6 +7,12 @@ models:
           - accepted_values:
               arguments:
                 values: ['SE3', 'NO2', 'DK1', 'SE4', 'DE', 'DK2']
+      - name: day_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['weekend', 'weekday']
       - name: hour
         data_tests:
           - not_null
@@ -16,3 +22,4 @@ models:
       - name: avg_price_by_hour_rank
         data_tests:
           - not_null
+      
