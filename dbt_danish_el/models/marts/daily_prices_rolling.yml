@@ -1,0 +1,18 @@
+models:
+  - name: daily_prices_rolling
+    columns:
+      - name: price_area
+        data_tests:
+        - not_null
+        - accepted_values:
+            arguments:
+              values: ['DK1', 'DK2']
+      - name: date
+        data_tests:
+        - not_null
+      - name: avg_price
+        data_tests:
+          - not_null
+      - name: moving_avg_7d
+        data_tests:
+          - not_null
