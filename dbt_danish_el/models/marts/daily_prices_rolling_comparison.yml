@@ -1,0 +1,26 @@
+models:
+  - name: daily_prices_rolling_comparison
+    columns:
+      - name: date
+        data_tests:
+        - not_null
+        - unique
+      - name: avg_price_dk1
+        data_tests:
+        - not_null
+      - name: avg_price_dk2
+        data_tests:
+          - not_null
+      - name: moving_avg_7d_dk1
+        data_tests: 
+          - not_null
+      - name: moving_avg_7d_dk2
+        data_tests:
+          - not_null
+      - name: dk1_minus_dk2_avg_price
+        data_tests:
+          - not_null
+      - name: dk1_minus_dk2_moving_avg
+        data_tests:
+          - not_null
+
