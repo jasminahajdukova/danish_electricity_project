@@ -1,0 +1,21 @@
+models:
+  - name: hourly_prices
+    columns:
+      - name: price_area
+        data_tests:
+        - not_null
+        - accepted_values:
+            arguments:
+              values: ['DK1', 'DK2']
+      - name: day_type
+        data_tests:
+        - not_null
+        - accepted_values:
+            arguments:
+              values: ['weekday', 'weekend']
+      - name: avg_price
+        data_tests:
+          - not_null
+      - name: cheapest_price_by_hour_rank
+        data_tests:
+          - not_null
