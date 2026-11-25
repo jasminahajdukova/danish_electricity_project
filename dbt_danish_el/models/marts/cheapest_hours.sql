@@ -1,4 +1,4 @@
-with hourly_avg as (
+with cheapest_hour as (
     select  price_area, 
             CASE
                 when date_part('isodow', time_utc AT TIME ZONE 'Europe/Copenhagen') in (6,7) then 'weekend'
@@ -16,5 +16,5 @@ select  price_area,
         hour,
         avg_price,
         rank() over (partition by price_area, day_type order by avg_price asc) as avg_price_by_hour_rank
-from hourly_avg
+from cheapest_hour
 
