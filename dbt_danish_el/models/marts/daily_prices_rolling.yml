@@ -7,12 +7,22 @@ models:
         - accepted_values:
             arguments:
               values: ['DK1', 'DK2']
+      - name: day_type
+        data_tests:
+        - not_null
+        - accepted_values:
+            arguments:
+              values: ['weekend', 'weekday']        
       - name: date
         data_tests:
         - not_null
       - name: avg_price
         data_tests:
           - not_null
+      - name: prev_day_avg_price
+        description: "Price from the previous day. The values may be null"
       - name: moving_avg_7d
         data_tests:
           - not_null
+      - name: avg_price_change_1d
+        description: "Difference in prices between the current and the previous day. Positive number means price went up"
